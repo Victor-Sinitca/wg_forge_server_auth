@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="doc.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Documentation</h1>
+<p>entrance address: https://wg-force3-backend.herokuapp.com/api</p>
+
+<h2>methods GET</h2>
+
+<h3>Get all users</h3>
+<p>query string address: /users</p>
+<p>not request </p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: [{
+               id: string,
+               name: string,
+               wishlist: [string],
+               shoppingList: [string],
+        }]
+}</pre>
+
+
+<h3>Get user by ID</h3>
+<p>query string address: /user?id=string</p>
+<p>request id:"string" <br>example: /user?id=61a6286353b5dad92e57b4c0</p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: {
+               id: string,
+               name: string,
+               wishlist: [string],
+               shoppingList: [string],
+        }
+}</pre>
+
+<h3>Get product by ID</h3>
+<p>query string address: /product?id=string</p>
+<pre>request id:"string" <br> example: /product?id=61a61eb74ef1f443c0cb654e</pre>
+<pre>response data:{
+        resultCode: 0 | 1,
+        messages: [string],
+        data: {
+              type:string,
+              span:number,
+              data: productData
+        }
+}</pre>
+<pre>productData(technique):{
+        id: string,
+        name: string,
+        description: string,
+        filter: {
+            nation: string,
+            type: string,
+            tier: string
+        },
+        price: {
+            basic: {
+                cost: string,
+                currency: string,
+            },
+            actual: {
+                cost: string,
+                currency: string,
+            },
+        },
+        images: {
+            span_1x1: string,
+            span_2x1: string,
+        },
+}</pre>
+<pre>productData(other type):{
+        id: string,
+        name: string,
+        description: string,
+        price: {
+            basic: {
+                cost: string,
+                currency: string,
+            },
+            actual: {
+                cost: string,
+                currency: string,
+            },
+        },
+        images: {
+            span_1x1: string,
+            span_2x1: string,
+},
+}</pre>
+
+
+<h3>Get products by filter</h3>
+<p>query string address: /product/filter?filter=string</p>
+<p>request filter =string
+    <br> example: /product/filter?filter=Technique
+    <br> filter= "Technique", "Premium", "Gold", "Provisions","All"
+
+<pre>response data:{
+        resultCode: 0 | 1,
+        messages: [string],
+        data: [{
+                type:string,
+                span:number,
+                data: [productData]
+            }]
+}</pre>
+<pre>productData(technique):{
+        id: string,
+        name: string,
+        description: string,
+        filter: {
+            nation: string,
+            type: string,
+            tier: string
+        },
+        price: {
+            basic: {
+                cost: string,
+                currency: string,
+            },
+            actual: {
+                cost: string,
+                currency: string,
+            },
+        },
+        images: {
+            span_1x1: string,
+            span_2x1: string,
+        },
+}</pre>
+<pre>productData(other type):{
+        id: string,
+        name: string,
+        description: string,
+        price: {
+            basic: {
+                cost: string,
+                currency: string,
+            },
+            actual: {
+                cost: string,
+                currency: string,
+            },
+        },
+        images: {
+            span_1x1: string,
+            span_2x1: string,
+        },
+}</pre>
+
+
+
+
+
+
+<h2>methods POST</h2>
+
+<h3>Add user</h3>
+<p>query string address: /user </p>
+<p>request data: {"name":"string"}
+    <br> example:{"name":"Tester"}</p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: {
+            id: string,
+            name: string,
+            wishlist: [string],
+            shoppingList: [string],
+        }
+} </pre>
+
+<h3>Get products by list</h3>
+<p>query string address: /products</p>
+<p>request data: {"listProductsId":[string]}
+    <br> example:{"listProductsId":["61a61a5138f1fb7fb25fde75","61a61a5138f1fb7fb25fde73", "61a61eb74ef1f443c0cb654e"]}</p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: [{
+                type:string,
+                span:number,
+                data: [productData]
+        }]
+} </pre>
+
+<h3>Change wishlist</h3>
+<p>query string address: /user/wishlist </p>
+<p>request data: {"userId":"string", "productId":"string"}
+    <br> example: {"userId":"61a6286353b5dad92e57b4c0", "productId":"61a61eb74ef1f443c0cb654e"}</p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: {
+                id: string,
+                name: string,
+                wishlist: [string],
+                shoppingList: [string],
+         }
+} </pre>
+
+<h3>Change purchase</h3>
+<p>query string address: /user/purchase </p>
+<p>request data: {"userId":"string","productId":"string" , isAdd:"boolean"}
+    <br> <strong>isAdd</strong>: boolean - if this field is <strong>true</strong>, the product is added to the purchase list, if this field is <strong>false</strong>, the product is removed from the purchase list
+    <br> example:{"userId":"61a6286353b5dad92e57b4c0", "productId":"61a61eb74ef1f443c0cb654e", isAdd:true}</p>
+<pre>response data: {
+        resultCode: 0 | 1,
+        messages: [string],
+        data: {
+                id: string,
+                name: string,
+                wishlist: [string],
+                shoppingList: [string],
+         }
+} </pre>
+</body>
+</html>
