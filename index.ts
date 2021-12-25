@@ -20,12 +20,7 @@ app.use(express.json({limit: '50mb'}))
 app.use(cookieParser()) // подключает res.cookie(`refreshToken`, userDate.refreshToken, )
 
 app.use(cors({
-    origin: process.env.UI_URL,
-    //origin: process.env.LOCAL_URL,
-   // origin: [""+process.env.UI_URL,],
-   /* methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,*/
+    origin: process.env.LOCAL_URL,
     credentials:true, // разрешаем куки
 }))
 app.use(bodyParser.urlencoded({
