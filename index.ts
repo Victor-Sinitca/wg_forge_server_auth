@@ -8,10 +8,11 @@ import mongoose from "mongoose";
 import errorMiddleware from "./middlewares/error-middleware"
 import cookieParser from "cookie-parser"
 
-
 mongoose.Promise = global.Promise;
 dotenv.config();
 
+
+const isProduction = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 8000
 const app = express()
 app.use(express.static('helper'));
@@ -20,7 +21,7 @@ app.use(express.json({limit: '50mb'}))
 app.use(cookieParser()) // подключает res.cookie(`refreshToken`, userDate.refreshToken, )
 
 app.use(cors({
-    origin: process.env.LOCAL_URL,
+    origin: [""+process.env.LOCAL_URL, ""+process.env.UI_UR],
     credentials:true, // разрешаем куки
 }))
 app.use(bodyParser.urlencoded({
@@ -34,7 +35,7 @@ app.use(bodyParser.json({
 }))
 app.use(`/api`, router)
 
-const isProduction = process.env.NODE_ENV === 'production';
+
 if (!isProduction) {
     app.use(errorHandler());
 }
