@@ -44,8 +44,8 @@ const start = async () => {
     try {
         //Configure Mongoose
         await mongoose.connect(process.env.BD_URL || "some url address DB", {
-            user:"root",
-            pass:"1986"
+            user:process.env.BD_USER,
+            pass:process.env.BD_PASS
         },function(error:any) {
             if(error) console.log(`error  mongoose.connect : ${error}`)
         });
